@@ -50,15 +50,15 @@ app.get("/scrape", function(req, res) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
     // Now, we grab every span within an story title, and do the following:
-    $("span.story-title").each(function(i, element) {
+    $("article").each(function(i, element) {
 
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(element).text();
-      result.link = $(element).children().attr("href");
-      result.description = $(element).parents("article").find("div.p").text();
+      result.title = $("span.story-title").children().text();
+      result.link = $("span.story-title").children().attr("href");
+      //result.description = $(element).children().attr("i");
 
       // Using our Article model, create a new entry
       // This effectively passes the result object to the entry (and the title and link)
