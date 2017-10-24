@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/newsfeed");
+mongoose.connect("mongodb://user:supersecurepassword@ds231725.mlab.com:31725/nerdnewsfeed");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -149,6 +149,7 @@ app.post("/articles/:id", function(req, res) {
 
 
 // Listen on port 3000
-app.listen(3000, function() {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
   console.log("App running on port 3000!");
 });
